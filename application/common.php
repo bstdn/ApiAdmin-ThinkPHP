@@ -10,3 +10,26 @@
 // +----------------------------------------------------------------------
 
 // 应用公共文件
+
+function p() {
+    $argc = func_get_args();
+    echo '<pre>';
+    foreach($argc as $var) {
+        print_r($var);
+        echo '<br/>';
+    }
+    echo '</pre>';
+    exit;
+
+    return;
+}
+
+function pr() {
+    $argc = func_get_args();
+    echo '<pre>';
+    foreach($argc as $var) {
+        print_r($var);
+        echo '<br/>';
+    }
+    echo '</pre>';
+}
