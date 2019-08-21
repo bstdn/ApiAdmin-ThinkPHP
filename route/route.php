@@ -8,3 +8,17 @@
 // +----------------------------------------------------------------------
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
+
+use think\facade\Route;
+
+Route::group('admin', function() {
+    Route::rule('Login/index', 'admin/Login/index', 'post');
+    Route::rule(
+        'Login/getUserInfo', 'admin/Login/getUserInfo', 'get'
+    )->middleware('AdminAuth');
+    Route::rule(
+        'Login/logout', 'admin/Login/logout', 'get'
+    )->middleware('AdminAuth');
+    //MISS路由定义
+    Route::miss('admin/Miss/index');
+})->middleware('AdminResponse');
