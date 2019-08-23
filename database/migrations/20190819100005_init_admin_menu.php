@@ -45,11 +45,13 @@ class InitAdminMenu extends Migrator
             [
                 'id'   => 4,
                 'name' => '系统管理',
+                'sort' => 1,
             ],
             [
                 'id'   => 5,
                 'name' => '菜单维护',
                 'fid'  => 4,
+                'sort' => 1,
             ],
             [
                 'id'   => 6,
@@ -80,6 +82,24 @@ class InitAdminMenu extends Migrator
                 'name' => '菜单删除',
                 'fid'  => 5,
                 'url'  => 'admin/Menu/del',
+            ],
+            [
+                'id'   => 11,
+                'name' => '日志管理',
+                'fid'  => 4,
+                'sort' => 2,
+            ],
+            [
+                'id'   => 12,
+                'name' => '获取操作日志列表',
+                'fid'  => 11,
+                'url'  => 'admin/Log/index',
+            ],
+            [
+                'id'   => 13,
+                'name' => '删除单条日志记录',
+                'fid'  => 11,
+                'url'  => 'admin/Log/del',
             ],
         ];
         $this->table('admin_menu')->insert($data)->save();

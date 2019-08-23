@@ -15,10 +15,10 @@ Route::group('admin', function() {
     Route::rule('Login/index', 'admin/Login/index', 'post');
     Route::rule(
         'Login/getUserInfo', 'admin/Login/getUserInfo', 'get'
-    )->middleware('AdminAuth');
+    )->middleware(['AdminAuth', 'AdminLog']);
     Route::rule(
         'Login/logout', 'admin/Login/logout', 'get'
-    )->middleware('AdminAuth');
+    )->middleware(['AdminAuth', 'AdminLog']);
 
     Route::group('Menu', [
         'index'        => ['admin/Menu/index', ['method' => 'get']],
@@ -26,7 +26,12 @@ Route::group('admin', function() {
         'add'          => ['admin/Menu/add', ['method' => 'post']],
         'edit'         => ['admin/Menu/edit', ['method' => 'post']],
         'del'          => ['admin/Menu/del', ['method' => 'get']],
-    ])->middleware('AdminAuth');
+    ])->middleware(['AdminAuth', 'AdminLog']);
+
+    Route::group('Log', [
+        'index' => ['admin/Log/index', ['method' => 'get']],
+        'del'   => ['admin/Log/del', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminLog']);
     //MISS路由定义
     Route::miss('admin/Miss/index');
 })->middleware('AdminResponse');
