@@ -28,6 +28,14 @@ Route::group('admin', function() {
         'del'          => ['admin/Menu/del', ['method' => 'get']],
     ])->middleware(['AdminAuth', 'AdminLog']);
 
+    Route::group('User', [
+        'index'        => ['admin/User/index', ['method' => 'get']],
+        'changeStatus' => ['admin/User/changeStatus', ['method' => 'get']],
+        'add'          => ['admin/User/add', ['method' => 'post']],
+        'edit'         => ['admin/User/edit', ['method' => 'post']],
+        'del'          => ['admin/User/del', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminLog']);
+
     Route::group('Log', [
         'index' => ['admin/Log/index', ['method' => 'get']],
         'del'   => ['admin/Log/del', ['method' => 'get']],

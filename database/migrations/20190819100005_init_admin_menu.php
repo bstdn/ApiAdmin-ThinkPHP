@@ -87,7 +87,7 @@ class InitAdminMenu extends Migrator
                 'id'   => 11,
                 'name' => '日志管理',
                 'fid'  => 4,
-                'sort' => 2,
+                'sort' => 3,
             ],
             [
                 'id'   => 12,
@@ -100,6 +100,37 @@ class InitAdminMenu extends Migrator
                 'name' => '删除单条日志记录',
                 'fid'  => 11,
                 'url'  => 'admin/Log/del',
+            ],
+            [
+                'id'   => 14,
+                'name' => '用户列表',
+                'fid'  => 4,
+                'url'  => 'admin/User/index',
+                'sort' => 2,
+            ],
+            [
+                'id'   => 15,
+                'name' => '用户状态修改',
+                'fid'  => 14,
+                'url'  => 'admin/User/changeStatus',
+            ],
+            [
+                'id'   => 16,
+                'name' => '新增用户',
+                'fid'  => 14,
+                'url'  => 'admin/User/add',
+            ],
+            [
+                'id'   => 17,
+                'name' => '编辑用户',
+                'fid'  => 14,
+                'url'  => 'admin/User/edit',
+            ],
+            [
+                'id'   => 18,
+                'name' => '用户删除',
+                'fid'  => 14,
+                'url'  => 'admin/User/del',
             ],
         ];
         $this->table('admin_menu')->insert($data)->save();
