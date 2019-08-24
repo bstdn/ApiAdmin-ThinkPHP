@@ -132,6 +132,18 @@ class InitAdminMenu extends Migrator
                 'fid'  => 14,
                 'url'  => 'admin/User/del',
             ],
+            [
+                'id'   => 19,
+                'name' => '更新个人信息',
+                'fid'  => 14,
+                'url'  => 'admin/User/own',
+            ],
+            [
+                'id'   => 20,
+                'name' => '文件上传',
+                'fid'  => 0,
+                'url'  => 'admin/Index/upload',
+            ],
         ];
         $this->table('admin_menu')->insert($data)->save();
     }

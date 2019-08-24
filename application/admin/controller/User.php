@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\model\AdminUser;
+use app\model\AdminUserData;
 use app\util\ReturnCode;
 use app\util\Strs;
 use app\util\Tools;
@@ -114,6 +115,38 @@ class User extends Base {
             return $this->buildFailed(ReturnCode::INVALID, '超级管理员不能被删除');
         }
         AdminUser::destroy($id);
+
+        return $this->buildSuccess();
+    }
+
+    public function own() {
+        $postData = $this->request->post();
+        $headImg = $postData['head_img'];
+        $userInfo = AdminUser::get(['id' => $this->userInfo['id']]);
+        if(!$userInfo) {
+            return $this->buildFailed(ReturnCode::INVALID, '用户不存在');
+        }
+        if($postData['password'] && $postData['oldPassword']) {
+            $oldPassword = Tools::encryptPassword($postData['oldPassword'], $userInfo['salt']);
+            unset($postData['oldPassword']);
+            if($oldPassword === $userInfo['password']) {
+                $postData['password'] = Tools::encryptPassword($postData['password'], $userInfo['salt']);
+            } else {
+                return $this->buildFailed(ReturnCode::INVALID, '原始密码不正确');
+            }
+        } else {
+            unset($postData['password']);
+            unset($postData['oldPassword']);
+        }
+        $postData['id'] = $this->userInfo['id'];
+        unset($postData['head_img']);
+        $res = AdminUser::update($postData);
+        if($res === false) {
+            return $this->buildFailed(ReturnCode::DB_SAVE_ERROR);
+        }
+        $userData = AdminUserData::get(['uid' => $postData['id']]);
+        $userData->head_img = $headImg;
+        $userData->save();
 
         return $this->buildSuccess();
     }

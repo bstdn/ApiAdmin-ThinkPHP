@@ -19,6 +19,9 @@ Route::group('admin', function() {
     Route::rule(
         'Login/logout', 'admin/Login/logout', 'get'
     )->middleware(['AdminAuth', 'AdminLog']);
+    Route::rule(
+        'Index/upload', 'admin/Index/upload', 'post'
+    )->middleware(['AdminAuth', 'AdminLog']);
 
     Route::group('Menu', [
         'index'        => ['admin/Menu/index', ['method' => 'get']],
@@ -34,6 +37,7 @@ Route::group('admin', function() {
         'add'          => ['admin/User/add', ['method' => 'post']],
         'edit'         => ['admin/User/edit', ['method' => 'post']],
         'del'          => ['admin/User/del', ['method' => 'get']],
+        'own'          => ['admin/User/own', ['method' => 'post']],
     ])->middleware(['AdminAuth', 'AdminLog']);
 
     Route::group('Log', [
