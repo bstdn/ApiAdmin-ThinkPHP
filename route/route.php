@@ -29,7 +29,7 @@ Route::group('admin', function() {
         'add'          => ['admin/Menu/add', ['method' => 'post']],
         'edit'         => ['admin/Menu/edit', ['method' => 'post']],
         'del'          => ['admin/Menu/del', ['method' => 'get']],
-    ])->middleware(['AdminAuth', 'AdminLog']);
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
 
     Route::group('User', [
         'index'        => ['admin/User/index', ['method' => 'get']],
@@ -38,12 +38,24 @@ Route::group('admin', function() {
         'edit'         => ['admin/User/edit', ['method' => 'post']],
         'del'          => ['admin/User/del', ['method' => 'get']],
         'own'          => ['admin/User/own', ['method' => 'post']],
-    ])->middleware(['AdminAuth', 'AdminLog']);
+        'getUsers'     => ['admin/User/getUsers', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
+
+    Route::group('Auth', [
+        'index'        => ['admin/Auth/index', ['method' => 'get']],
+        'changeStatus' => ['admin/Auth/changeStatus', ['method' => 'get']],
+        'add'          => ['admin/Auth/add', ['method' => 'post']],
+        'edit'         => ['admin/Auth/edit', ['method' => 'post']],
+        'del'          => ['admin/Auth/del', ['method' => 'get']],
+        'delMember'    => ['admin/Auth/delMember', ['method' => 'get']],
+        'getGroups'    => ['admin/Auth/getGroups', ['method' => 'get']],
+        'getRuleList'  => ['admin/Auth/getRuleList', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
 
     Route::group('Log', [
         'index' => ['admin/Log/index', ['method' => 'get']],
         'del'   => ['admin/Log/del', ['method' => 'get']],
-    ])->middleware(['AdminAuth', 'AdminLog']);
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
     //MISS路由定义
     Route::miss('admin/Miss/index');
 })->middleware('AdminResponse');

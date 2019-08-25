@@ -2,11 +2,13 @@
 
 namespace app\admin\controller;
 
+use app\model\AdminAuthGroupAccess;
 use app\model\AdminUser;
 use app\model\AdminUserData;
 use app\util\ReturnCode;
 use app\util\Strs;
 use app\util\Tools;
+use think\Db;
 
 class User extends Base {
 
@@ -35,11 +37,21 @@ class User extends Base {
                 $item->userData;
             })->toArray();
         $listInfo = $listObj['data'];
-        foreach($listInfo as &$value) {
+        $idArr = array_column($listInfo, 'id');
+        $userGroup = AdminAuthGroupAccess::all(function($query) use ($idArr) {
+            $query->whereIn('uid', $idArr);
+        })->toArray();
+        $userGroup = Tools::buildArrByNewKey($userGroup, 'uid');
+        foreach($listInfo as $key => &$value) {
             if($value['userData']) {
                 $value['userData']['last_login_ip'] = long2ip($value['userData']['last_login_ip']);
                 $value['userData']['last_login_time'] = date('Y-m-d H:i:s', $value['userData']['last_login_time']);
                 $value['create_ip'] = long2ip($value['create_ip']);
+            }
+            if(isset($userGroup[$value['id']])) {
+                $listInfo[$key]['group_id'] = explode(',', $userGroup[$value['id']]['group_id']);
+            } else {
+                $listInfo[$key]['group_id'] = [];
             }
         }
 
@@ -64,10 +76,15 @@ class User extends Base {
     }
 
     public function add() {
+        $groups = '';
         $postData = $this->request->post();
         $postData['create_ip'] = request()->ip(1);
         $postData['salt'] = Strs::randString(6);
         $postData['password'] = Tools::encryptPassword($postData['password'], $postData['salt']);
+        if(isset($postData['group_id']) && $postData['group_id']) {
+            $groups = trim(implode(',', $postData['group_id']), ',');
+            unset($postData['group_id']);
+        }
         $userInfo = AdminUser::get(['username' => $postData['username']]);
         if($userInfo) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR, '用户账号已存在');
@@ -76,17 +93,26 @@ class User extends Base {
         if($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR);
         }
+        AdminAuthGroupAccess::create([
+            'uid'      => $res->id,
+            'group_id' => $groups,
+        ]);
 
         return $this->buildSuccess();
     }
 
     public function edit() {
+        $groups = '';
         $postData = $this->request->post();
         if($postData['password'] == '') {
             unset($postData['password']);
         } else {
             $postData['salt'] = Strs::randString(6);
             $postData['password'] = Tools::encryptPassword($postData['password'], $postData['salt']);
+        }
+        if(isset($postData['group_id']) && $postData['group_id']) {
+            $groups = trim(implode(',', $postData['group_id']), ',');
+            unset($postData['group_id']);
         }
         $hasUserInfo = AdminUser::get(['id' => $postData['id']]);
         if(!$hasUserInfo) {
@@ -100,6 +126,15 @@ class User extends Base {
         $res = AdminUser::update($postData);
         if($res === false) {
             return $this->buildFailed(ReturnCode::DB_SAVE_ERROR);
+        }
+        $has = AdminAuthGroupAccess::get(['uid' => $postData['id']]);
+        if($has) {
+            AdminAuthGroupAccess::update(['group_id' => $groups], ['uid' => $postData['id']]);
+        } else {
+            AdminAuthGroupAccess::create([
+                'uid'      => $postData['id'],
+                'group_id' => $groups,
+            ]);
         }
 
         return $this->buildSuccess();
@@ -115,6 +150,7 @@ class User extends Base {
             return $this->buildFailed(ReturnCode::INVALID, '超级管理员不能被删除');
         }
         AdminUser::destroy($id);
+        AdminAuthGroupAccess::destroy(['uid' => $id]);
 
         return $this->buildSuccess();
     }
@@ -149,5 +185,36 @@ class User extends Base {
         $userData->save();
 
         return $this->buildSuccess();
+    }
+
+    public function getUsers() {
+        $limit = $this->request->get('size', config('apiadmin.admin_list_default'));
+        $page = $this->request->get('page', 1);
+        $gid = $this->request->get('gid', 0);
+        if(!$gid) {
+            return $this->buildFailed(ReturnCode::PARAM_INVALID, '非法操作');
+        }
+        $totalNum = (new AdminAuthGroupAccess())->where('find_in_set("' . $gid . '", `group_id`)')->count();
+        $start = $limit * ($page - 1);
+        $sql = "SELECT au.* FROM " . (new AdminUser)->getTable() . " as au LEFT JOIN " . (new AdminAuthGroupAccess)->getTable() . " as aaga " .
+            " ON aaga.`uid` = au.`id` WHERE find_in_set('{$gid}', aaga.`group_id`) " .
+            " ORDER BY au.create_time DESC LIMIT {$start}, {$limit}";
+        $userInfo = Db::query($sql);
+        $uidArr = array_column($userInfo, 'id');
+        $userData = (new AdminUserData())->whereIn('uid', $uidArr)->select();
+        $userData = Tools::buildArrByNewKey($userData, 'uid');
+        foreach($userInfo as $key => $value) {
+            if(isset($userData[$value['id']])) {
+                $userInfo[$key]['last_login_ip'] = long2ip($userData[$value['id']]['last_login_ip']);
+                $userInfo[$key]['login_times'] = $userData[$value['id']]['login_times'];
+                $userInfo[$key]['last_login_time'] = date('Y-m-d H:i:s', $userData[$value['id']]['last_login_time']);
+            }
+            $userInfo[$key]['create_ip'] = long2ip($userInfo[$key]['create_ip']);
+        }
+
+        return $this->buildSuccess([
+            'list'  => $userInfo,
+            'count' => $totalNum,
+        ]);
     }
 }

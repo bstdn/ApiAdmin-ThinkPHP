@@ -11,4 +11,6 @@ class ReturnCode {
     const LOGIN_ERROR = -7;
     const EMPTY_PARAMS = -12;
     const AUTH_ERROR = -14;
+
+    const PARAM_INVALID = -995; // 参数无效
 }

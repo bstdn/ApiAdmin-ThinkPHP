@@ -38,6 +38,15 @@ class Tools {
         return false;
     }
 
+    public static function buildArrByNewKey($array, $keyName = 'id') {
+        $list = array();
+        foreach($array as $item) {
+            $list[$item[$keyName]] = $item;
+        }
+
+        return $list;
+    }
+
     public static function listToTree($list, $pk = 'id', $pid = 'fid', $child = '_child', $root = '0') {
         $tree = array();
         if(is_array($list)) {

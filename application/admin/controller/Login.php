@@ -2,6 +2,9 @@
 
 namespace app\admin\controller;
 
+use app\model\AdminAuthGroupAccess;
+use app\model\AdminAuthRule;
+use app\model\AdminMenu;
 use app\model\AdminUser;
 use app\model\AdminUserData;
 use app\util\Enum;
@@ -67,9 +70,18 @@ class Login extends Base {
     public function getAccess($uid) {
         $isSupper = Tools::isAdministrator($uid);
         if($isSupper) {
-            return ['admin'];
+            $access = AdminMenu::all(['hide' => 0])->toArray();
+
+            return array_values(array_filter(array_column($access, 'url')));
         } else {
-            return ['editor'];
+            $groups = AdminAuthGroupAccess::get(['uid' => $uid]);
+            if(isset($groups) && $groups->group_id) {
+                $access = (new AdminAuthRule())->whereIn('group_id', $groups->group_id)->select()->toArray();
+
+                return array_values(array_unique(array_column($access, 'url')));
+            } else {
+                return [];
+            }
         }
     }
 }

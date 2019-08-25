@@ -87,7 +87,7 @@ class InitAdminMenu extends Migrator
                 'id'   => 11,
                 'name' => '日志管理',
                 'fid'  => 4,
-                'sort' => 3,
+                'sort' => 4,
             ],
             [
                 'id'   => 12,
@@ -143,6 +143,66 @@ class InitAdminMenu extends Migrator
                 'name' => '文件上传',
                 'fid'  => 0,
                 'url'  => 'admin/Index/upload',
+            ],
+            [
+                'id'    => 21,
+                'name'  => '权限管理',
+                'fid'   => 4,
+                'sort'  => 3,
+            ],
+            [
+                'id'    => 22,
+                'name'  => '权限列表',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/index',
+            ],
+            [
+                'id'    => 23,
+                'name'  => '权限组状态编辑',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/changeStatus',
+            ],
+            [
+                'id'    => 24,
+                'name'  => '新增权限组',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/add',
+            ],
+            [
+                'id'    => 25,
+                'name'  => '权限组编辑',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/edit',
+            ],
+            [
+                'id'    => 26,
+                'name'  => '删除权限组',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/del',
+            ],
+            [
+                'id'    => 27,
+                'name'  => '从指定组中删除指定用户',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/delMember',
+            ],
+            [
+                'id'    => 28,
+                'name'  => '获取全部已开放的可选组',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/getGroups',
+            ],
+            [
+                'id'    => 29,
+                'name'  => '获取组所有的权限列表',
+                'fid'   => 21,
+                'url'   => 'admin/Auth/getRuleList',
+            ],
+            [
+                'id'    => 30,
+                'name'  => '获取当前组的全部用户',
+                'fid'   => 14,
+                'url'   => 'admin/User/getUsers',
             ],
         ];
         $this->table('admin_menu')->insert($data)->save();
