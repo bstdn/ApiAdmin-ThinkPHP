@@ -87,6 +87,14 @@ Route::group('admin', function() {
         'edit'         => ['admin/Fields/edit', ['method' => 'post']],
         'del'          => ['admin/Fields/del', ['method' => 'get']],
     ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
+
+    Route::group('AppGroup', [
+        'index'        => ['admin/AppGroup/index', ['method' => 'get']],
+        'changeStatus' => ['admin/AppGroup/changeStatus', ['method' => 'get']],
+        'add'          => ['admin/AppGroup/add', ['method' => 'post']],
+        'edit'         => ['admin/AppGroup/edit', ['method' => 'post']],
+        'del'          => ['admin/AppGroup/del', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
     //MISS路由定义
     Route::miss('admin/Miss/index');
 })->middleware('AdminResponse');

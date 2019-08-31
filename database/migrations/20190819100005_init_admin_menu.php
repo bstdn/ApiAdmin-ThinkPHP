@@ -207,7 +207,7 @@ class InitAdminMenu extends Migrator
             [
                 'id'   => 31,
                 'name' => '接口管理',
-                'sort' => 2,
+                'sort' => 3,
             ],
             [
                 'id'   => 32,
@@ -332,6 +332,46 @@ class InitAdminMenu extends Migrator
                 'name' => '删除接口字段',
                 'fid'  => 40,
                 'url'  => 'admin/Fields/del',
+            ],
+            [
+                'id'   => 53,
+                'name' => '应用接入',
+                'sort' => 2,
+            ],
+            [
+                'id'   => 54,
+                'name' => '应用分组',
+                'fid'  => 53,
+            ],
+            [
+                'id'   => 55,
+                'name' => '应用分组列表',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/index',
+            ],
+            [
+                'id'   => 56,
+                'name' => '应用组状态编辑',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/changeStatus',
+            ],
+            [
+                'id'   => 57,
+                'name' => '新增应用组',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/add',
+            ],
+            [
+                'id'   => 58,
+                'name' => '应用组编辑',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/edit',
+            ],
+            [
+                'id'   => 59,
+                'name' => '删除应用组',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/del',
             ],
         ];
         $this->table('admin_menu')->insert($data)->save();
