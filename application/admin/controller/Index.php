@@ -46,4 +46,10 @@ class Index extends Base {
             return $this->buildFailed(ReturnCode::FILE_SAVE_ERROR, '文件上传失败');
         }
     }
+
+    public function getHash() {
+        $res['hash'] = uniqid();
+
+        return $this->buildSuccess($res);
+    }
 }

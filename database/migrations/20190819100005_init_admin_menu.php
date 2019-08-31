@@ -204,6 +204,51 @@ class InitAdminMenu extends Migrator
                 'fid'  => 14,
                 'url'  => 'admin/User/getUsers',
             ],
+            [
+                'id'   => 31,
+                'name' => '接口管理',
+                'sort' => 2,
+            ],
+            [
+                'id'   => 32,
+                'name' => '接口分组',
+                'fid'  => 31,
+            ],
+            [
+                'id'   => 33,
+                'name' => '接口分组列表',
+                'fid'  => 32,
+                'url'  => 'admin/InterfaceGroup/index',
+            ],
+            [
+                'id'   => 34,
+                'name' => '接口组状态编辑',
+                'fid'  => 32,
+                'url'  => 'admin/InterfaceGroup/changeStatus',
+            ],
+            [
+                'id'   => 35,
+                'name' => '新增接口组',
+                'fid'  => 32,
+                'url'  => 'admin/InterfaceGroup/add',
+            ],
+            [
+                'id'   => 36,
+                'name' => '接口组编辑',
+                'fid'  => 32,
+                'url'  => 'admin/InterfaceGroup/edit',
+            ],
+            [
+                'id'   => 37,
+                'name' => '删除接口组',
+                'fid'  => 32,
+                'url'  => 'admin/InterfaceGroup/del',
+            ],
+            [
+                'id'   => 38,
+                'name' => '获取接口唯一标识',
+                'url'  => 'admin/Index/getHash',
+            ],
         ];
         $this->table('admin_menu')->insert($data)->save();
     }

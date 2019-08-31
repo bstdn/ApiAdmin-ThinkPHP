@@ -22,6 +22,9 @@ Route::group('admin', function() {
     Route::rule(
         'Index/upload', 'admin/Index/upload', 'post'
     )->middleware(['AdminAuth', 'AdminLog']);
+    Route::rule(
+        'Index/getHash', 'admin/Index/getHash', 'get'
+    )->middleware(['AdminAuth', 'AdminLog']);
 
     Route::group('Menu', [
         'index'        => ['admin/Menu/index', ['method' => 'get']],
@@ -55,6 +58,14 @@ Route::group('admin', function() {
     Route::group('Log', [
         'index' => ['admin/Log/index', ['method' => 'get']],
         'del'   => ['admin/Log/del', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
+
+    Route::group('InterfaceGroup', [
+        'index'        => ['admin/InterfaceGroup/index', ['method' => 'get']],
+        'changeStatus' => ['admin/InterfaceGroup/changeStatus', ['method' => 'get']],
+        'add'          => ['admin/InterfaceGroup/add', ['method' => 'post']],
+        'edit'         => ['admin/InterfaceGroup/edit', ['method' => 'post']],
+        'del'          => ['admin/InterfaceGroup/del', ['method' => 'get']],
     ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
     //MISS路由定义
     Route::miss('admin/Miss/index');
