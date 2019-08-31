@@ -5,6 +5,7 @@ namespace app\http\middleware;
 use app\model\AdminAuthGroup;
 use app\model\AdminAuthGroupAccess;
 use app\model\AdminAuthRule;
+use app\util\Enum;
 use app\util\ReturnCode;
 use app\util\Tools;
 
@@ -42,7 +43,7 @@ class AdminPermission {
     private function getAuth($uid) {
         $groups = AdminAuthGroupAccess::get(['uid' => $uid]);
         if(isset($groups) && $groups->group_id) {
-            $openGroup = (new AdminAuthGroup())->whereIn('id', $groups->group_id)->where(['status' => 1])->select();
+            $openGroup = (new AdminAuthGroup())->whereIn('id', $groups->group_id)->where(['status' => Enum::isTrue])->select();
             if(isset($openGroup)) {
                 $openGroupArr = [];
                 foreach($openGroup as $group) {

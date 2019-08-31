@@ -9,7 +9,7 @@ use app\util\Tools;
 class Menu extends Base {
 
     public function index() {
-        $menu_list = (new AdminMenu)->where([])->order('sort', 'ASC')->select()->toArray();
+        $menu_list = (new AdminMenu)->order('sort', 'ASC')->select()->toArray();
         $menu_list = Tools::formatTree(Tools::listToTree($menu_list));
 
         return $this->buildSuccess([

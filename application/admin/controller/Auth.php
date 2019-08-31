@@ -6,6 +6,7 @@ use app\model\AdminAuthGroup;
 use app\model\AdminAuthGroupAccess;
 use app\model\AdminAuthRule;
 use app\model\AdminMenu;
+use app\util\Enum;
 use app\util\ReturnCode;
 use app\util\Tools;
 
@@ -23,7 +24,7 @@ class Auth extends Base {
         if($keywords) {
             $obj = $obj->whereLike('name', "%{$keywords}%");
         }
-        $listObj = $obj->order('id DESC')->paginate($limit, false, ['page' => $start])->toArray();
+        $listObj = $obj->order('id', 'DESC')->paginate($limit, false, ['page' => $start])->toArray();
 
         return $this->buildSuccess([
             'list'  => $listObj['data'],
@@ -127,7 +128,7 @@ class Auth extends Base {
     }
 
     public function getGroups() {
-        $listInfo = (new AdminAuthGroup())->where(['status' => 1])->order('id', 'DESC')->select()->toArray();
+        $listInfo = (new AdminAuthGroup())->where(['status' => Enum::isTrue])->order('id', 'DESC')->select()->toArray();
         $count = count($listInfo);
 
         return $this->buildSuccess([

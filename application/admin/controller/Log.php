@@ -26,7 +26,7 @@ class Log extends Base {
                     break;
             }
         }
-        $listObj = $obj->order('add_time DESC')->paginate($limit, false, ['page' => $start])->toArray();
+        $listObj = $obj->order('add_time', 'DESC')->paginate($limit, false, ['page' => $start])->toArray();
 
         return $this->buildSuccess([
             'list'  => $listObj['data'],

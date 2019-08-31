@@ -5,7 +5,7 @@ namespace app\util;
 class Tools {
 
     public static function encryptPassword($password, $salt) {
-        return md5(md5($password).$salt);
+        return md5(md5($password) . $salt);
     }
 
     public static function isAdministrator($uid = '') {
@@ -39,7 +39,7 @@ class Tools {
     }
 
     public static function buildArrByNewKey($array, $keyName = 'id') {
-        $list = array();
+        $list = [];
         foreach($array as $item) {
             $list[$item[$keyName]] = $item;
         }
@@ -48,9 +48,9 @@ class Tools {
     }
 
     public static function listToTree($list, $pk = 'id', $pid = 'fid', $child = '_child', $root = '0') {
-        $tree = array();
+        $tree = [];
         if(is_array($list)) {
-            $refer = array();
+            $refer = [];
             foreach($list as $key => $data) {
                 $refer[$data[$pk]] = &$list[$key];
             }
@@ -71,7 +71,7 @@ class Tools {
     }
 
     public static function formatTree($list, $lv = 0, $title = 'name') {
-        $formatTree = array();
+        $formatTree = [];
         foreach($list as $key => $val) {
             $title_prefix = '';
             for($i = 0; $i < $lv; $i++) {

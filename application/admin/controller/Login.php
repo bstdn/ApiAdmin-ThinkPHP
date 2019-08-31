@@ -46,7 +46,6 @@ class Login extends Base {
         } else {
             return $this->buildFailed(ReturnCode::LOGIN_ERROR, '用户已被禁用，请联系管理员');
         }
-
         $userInfo['access'] = $this->getAccess($userInfo['id']);
         unset($userInfo['password'], $userInfo['salt']);
         $apiAuth = md5(uniqid() . time());

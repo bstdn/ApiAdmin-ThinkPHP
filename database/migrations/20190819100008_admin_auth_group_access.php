@@ -27,17 +27,17 @@ class AdminAuthGroupAccess extends Migrator
      */
     public function change() {
         $table = $this->table('admin_auth_group_access', [
-            'comment' => '用户和组的对应关系'
+            'comment' => '用户和组的对应关系',
         ]);
         $table->addColumn('uid', 'integer', [
             'limit'   => 11,
             'default' => 0,
             'signed'  => false,
-            'comment' => ''
+            'comment' => '',
         ])->addColumn('group_id', 'string', [
             'limit'   => 255,
             'default' => '',
-            'comment' => ''
+            'comment' => '',
         ])->addIndex(['uid'])->addIndex(['group_id'])->create();
     }
 }

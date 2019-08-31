@@ -27,40 +27,40 @@ class AdminMenu extends Migrator
      */
     public function change() {
         $table = $this->table('admin_menu', [
-            'comment' => '目录信息'
+            'comment' => '目录信息',
         ]);
         $table->addColumn('name', 'string', [
             'limit'   => 50,
             'default' => '',
-            'comment' => '菜单名'
+            'comment' => '菜单名',
         ])->addColumn('fid', 'integer', [
             'limit'   => 11,
             'default' => 0,
-            'comment' => '父级菜单ID'
+            'comment' => '父级菜单ID',
         ])->addColumn('url', 'string', [
             'limit'   => 50,
             'default' => '',
-            'comment' => '链接'
+            'comment' => '链接',
         ])->addColumn('auth', 'integer', [
             'limit'   => 2,
             'default' => 0,
-            'comment' => '访客权限'
+            'comment' => '访客权限',
         ])->addColumn('sort', 'integer', [
             'limit'   => 11,
             'default' => 0,
-            'comment' => '排序'
+            'comment' => '排序',
         ])->addColumn('hide', 'integer', [
             'limit'   => 2,
             'default' => 0,
-            'comment' => '是否显示'
+            'comment' => '是否显示',
         ])->addColumn('icon', 'string', [
             'limit'   => 50,
             'default' => '',
-            'comment' => '菜单图标'
+            'comment' => '菜单图标',
         ])->addColumn('level', 'integer', [
             'limit'   => 2,
             'default' => 0,
-            'comment' => '菜单认证等级'
+            'comment' => '菜单认证等级',
         ])->create();
     }
 }

@@ -27,19 +27,19 @@ class AdminAuthGroup extends Migrator
      */
     public function change() {
         $table = $this->table('admin_auth_group', [
-            'comment' => '权限组'
+            'comment' => '权限组',
         ]);
         $table->addColumn('name', 'string', [
             'limit'   => 50,
             'default' => '',
-            'comment' => '组名称'
+            'comment' => '组名称',
         ])->addColumn('description', 'text', [
             'comment' => '组描述',
-            'null'    => true
+            'null'    => true,
         ])->addColumn('status', 'integer', [
             'limit'   => 2,
             'default' => 1,
-            'comment' => '组状态：为1正常，为0禁用'
+            'comment' => '组状态：为1正常，为0禁用',
         ])->create();
     }
 }

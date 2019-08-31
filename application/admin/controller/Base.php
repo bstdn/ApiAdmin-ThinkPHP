@@ -7,7 +7,7 @@ use think\Controller;
 
 class Base extends Controller {
 
-    private $debug = [];
+    private   $debug = [];
     protected $userInfo;
 
     public function __construct() {
