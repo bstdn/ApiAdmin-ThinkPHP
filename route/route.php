@@ -66,6 +66,26 @@ Route::group('admin', function() {
         'add'          => ['admin/InterfaceGroup/add', ['method' => 'post']],
         'edit'         => ['admin/InterfaceGroup/edit', ['method' => 'post']],
         'del'          => ['admin/InterfaceGroup/del', ['method' => 'get']],
+        'getAll'       => ['admin/InterfaceGroup/getAll', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
+
+    Route::group('InterfaceList', [
+        'index'        => ['admin/InterfaceList/index', ['method' => 'get']],
+        'changeStatus' => ['admin/InterfaceList/changeStatus', ['method' => 'get']],
+        'add'          => ['admin/InterfaceList/add', ['method' => 'post']],
+        'edit'         => ['admin/InterfaceList/edit', ['method' => 'post']],
+        'del'          => ['admin/InterfaceList/del', ['method' => 'get']],
+        'refresh'      => ['admin/InterfaceList/refresh', ['method' => 'get']],
+    ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
+
+    Route::group('Fields', [
+        'index'        => ['admin/Fields/index', ['method' => 'get']],
+        'request'      => ['admin/Fields/request', ['method' => 'get']],
+        'response'     => ['admin/Fields/response', ['method' => 'get']],
+        'upload'       => ['admin/Fields/upload', ['method' => 'post']],
+        'add'          => ['admin/Fields/add', ['method' => 'post']],
+        'edit'         => ['admin/Fields/edit', ['method' => 'post']],
+        'del'          => ['admin/Fields/del', ['method' => 'get']],
     ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
     //MISS路由定义
     Route::miss('admin/Miss/index');

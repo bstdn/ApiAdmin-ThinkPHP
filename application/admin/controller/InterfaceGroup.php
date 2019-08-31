@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 
 use app\model\AdminGroup;
+use app\model\AdminList;
 use app\util\ReturnCode;
 
 class InterfaceGroup extends Base {
@@ -77,8 +78,17 @@ class InterfaceGroup extends Base {
         if($hash === 'default') {
             return $this->buildFailed(ReturnCode::INVALID, '系统预留关键数据，禁止删除');
         }
+        AdminList::update(['group_hash' => 'default'], ['group_hash' => $hash]);
         AdminGroup::destroy(['hash' => $hash]);
 
         return $this->buildSuccess();
+    }
+
+    public function getAll() {
+        $listInfo = (new AdminGroup())->where(['status' => 1])->select();
+
+        return $this->buildSuccess([
+            'list' => $listInfo,
+        ]);
     }
 }

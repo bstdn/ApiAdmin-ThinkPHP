@@ -12,4 +12,5 @@ class ReturnCode {
     const EMPTY_PARAMS    = -12;
     const AUTH_ERROR      = -14;
     const PARAM_INVALID   = -995;
+    const EXCEPTION       = -999;
 }

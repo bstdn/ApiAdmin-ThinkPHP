@@ -249,6 +249,90 @@ class InitAdminMenu extends Migrator
                 'name' => '获取接口唯一标识',
                 'url'  => 'admin/Index/getHash',
             ],
+            [
+                'id'   => 39,
+                'name' => '获取全部有效的接口组',
+                'url'  => 'admin/InterfaceGroup/getAll',
+                'fid'  => 32,
+            ],
+            [
+                'id'   => 40,
+                'name' => '接口维护',
+                'fid'  => 31,
+                'sort' => 1,
+            ],
+            [
+                'id'   => 41,
+                'name' => '接口列表',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/index',
+            ],
+            [
+                'id'   => 42,
+                'name' => '接口状态编辑',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/changeStatus',
+            ],
+            [
+                'id'   => 43,
+                'name' => '新增接口',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/add',
+            ],
+            [
+                'id'   => 44,
+                'name' => '接口编辑',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/edit',
+            ],
+            [
+                'id'   => 45,
+                'name' => '删除接口',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/del',
+            ],
+            [
+                'id'   => 46,
+                'name' => '刷新路由',
+                'fid'  => 40,
+                'url'  => 'admin/InterfaceList/refresh',
+            ],
+            [
+                'id'   => 47,
+                'name' => '获取接口请求字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/request',
+            ],
+            [
+                'id'   => 48,
+                'name' => '获取接口返回字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/response',
+            ],
+            [
+                'id'   => 49,
+                'name' => '上传接口返回字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/upload',
+            ],
+            [
+                'id'   => 50,
+                'name' => '添加接口字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/add',
+            ],
+            [
+                'id'   => 51,
+                'name' => '编辑接口字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/edit',
+            ],
+            [
+                'id'   => 52,
+                'name' => '删除接口字段',
+                'fid'  => 40,
+                'url'  => 'admin/Fields/del',
+            ],
         ];
         $this->table('admin_menu')->insert($data)->save();
     }
