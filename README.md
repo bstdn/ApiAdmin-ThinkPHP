@@ -1,5 +1,9 @@
 # php-thinkphp-api-admin
 
+## 特别提示
+
+> 本项目前后端分离，与[vue-iview-api-admin](https://github.com/bstdn/vue-iview-api-admin)配合使用
+
 ## 环境需求
 
 - PHP >= 5.6
@@ -37,3 +41,14 @@ php think migrate:run
 # 安装完成后，查看后台管理员的账号密码
 cat application/install/lock.ini
 ```
+
+### Redis配置
+
+```
+# 修改 Redis 相关配置；如不使用 Redis，可修改为文件缓存；详细可查看：https://www.kancloud.cn/manual/thinkphp5_1/354116
+config/cache.php
+```
+
+## 相关技术栈
+
+- [ThinkPHP](https://github.com/top-think/think)

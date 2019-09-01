@@ -14,7 +14,7 @@
 // +----------------------------------------------------------------------
 
 return [
-    'app_version'           => 'v1.0',
+    'app_version'           => 'v3.0',
     'app_name'              => 'PHP ThinkPHP Api Admin',
     'user_administrator'    => [1],
     'online_time'           => 7200,
