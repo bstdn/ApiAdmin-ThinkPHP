@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\model\AdminApp;
 use app\model\AdminFields;
 use app\model\AdminList;
 use app\util\ReturnCode;
@@ -88,6 +89,25 @@ class InterfaceList extends Base {
         if(!$hash) {
             return $this->buildFailed(ReturnCode::EMPTY_PARAMS, '缺少必要参数');
         }
+        $hashRule = AdminApp::all([
+            'app_api' => ['like', "%$hash%"],
+        ]);
+        if($hashRule) {
+            $oldInfo = AdminList::get(['hash' => $hash]);
+            foreach($hashRule as $rule) {
+                $appApiArr = explode(',', $rule->app_api);
+                $appApiIndex = array_search($hash, $appApiArr);
+                array_splice($appApiArr, $appApiIndex, 1);
+                $rule->app_api = implode(',', $appApiArr);
+                $appApiShowArrOld = json_decode($rule->app_api_show, true);
+                $appApiShowArr = $appApiShowArrOld[$oldInfo->groupHash];
+                $appApiShowIndex = array_search($hash, $appApiShowArr);
+                array_splice($appApiShowArr, $appApiShowIndex, 1);
+                $appApiShowArrOld[$oldInfo->groupHash] = $appApiShowArr;
+                $rule->app_api_show = json_encode($appApiShowArrOld);
+                $rule->save();
+            }
+        }
         AdminList::destroy(['hash' => $hash]);
         AdminFields::destroy(['hash' => $hash]);
         cache('ApiInfo:' . $hash, null);
@@ -104,7 +124,7 @@ class InterfaceList extends Base {
         $listInfo = AdminList::all(['status' => 1]);
         $tplStr = [];
         foreach($listInfo as $value) {
-            array_push($tplStr, 'Route::rule(\'' . addslashes($value->hash) . '\',\'api/' . addslashes($value->api_class) . '\', \'' . $methodArr[$value->method] . '\');');
+            array_push($tplStr, 'Route::rule(\'' . addslashes($value->hash) . '\',\'api/' . addslashes($value->api_class) . '\', \'' . $methodArr[$value->method] . '\')->middleware([\'ApiAuth\', \'ApiPermission\', \'RequestFilter\', \'ApiLog\']);');
         }
         $tplOriginStr = str_replace(['{$API_RULE}'], [implode($tplStr, "\n    ")], $tplOriginStr);
         file_put_contents($apiRoutePath, $tplOriginStr);

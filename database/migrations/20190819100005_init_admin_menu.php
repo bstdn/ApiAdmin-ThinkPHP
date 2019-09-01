@@ -373,6 +373,60 @@ class InitAdminMenu extends Migrator
                 'fid'  => 54,
                 'url'  => 'admin/AppGroup/del',
             ],
+            [
+                'id'   => 60,
+                'name' => '获取全部可用应用组',
+                'fid'  => 54,
+                'url'  => 'admin/AppGroup/getAll',
+            ],
+            [
+                'id'   => 61,
+                'name' => '应用管理',
+                'fid'  => 53,
+                'sort' => 1,
+            ],
+            [
+                'id'   => 62,
+                'name' => '应用列表',
+                'fid'  => 61,
+                'url'  => 'admin/App/index',
+            ],
+            [
+                'id'   => 63,
+                'name' => '应用状态编辑',
+                'fid'  => 61,
+                'url'  => 'admin/App/changeStatus',
+            ],
+            [
+                'id'   => 64,
+                'name' => '新增应用',
+                'fid'  => 61,
+                'url'  => 'admin/App/add',
+            ],
+            [
+                'id'   => 65,
+                'name' => '应用编辑',
+                'fid'  => 61,
+                'url'  => 'admin/App/edit',
+            ],
+            [
+                'id'   => 66,
+                'name' => '删除应用',
+                'fid'  => 61,
+                'url'  => 'admin/App/del',
+            ],
+            [
+                'id'   => 67,
+                'name' => '获取AppId,AppSecret,接口列表,应用接口权限细节',
+                'fid'  => 68,
+                'url'  => 'admin/App/getAppInfo',
+            ],
+            [
+                'id'   => 69,
+                'name' => '刷新AppSecret',
+                'fid'  => 61,
+                'url'  => 'admin/App/refreshAppSecret',
+            ],
         ];
         $this->table('admin_menu')->insert($data)->save();
     }

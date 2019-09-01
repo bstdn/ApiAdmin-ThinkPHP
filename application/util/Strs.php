@@ -4,6 +4,24 @@ namespace app\util;
 
 class Strs {
 
+    public static function uuid() {
+        $charId = md5(uniqid(mt_rand(), true));
+        $hyphen = chr(45);
+        $uuid = chr(123)
+            . substr($charId, 0, 8) . $hyphen
+            . substr($charId, 8, 4) . $hyphen
+            . substr($charId, 12, 4) . $hyphen
+            . substr($charId, 16, 4) . $hyphen
+            . substr($charId, 20, 12)
+            . chr(125);
+
+        return $uuid;
+    }
+
+    public static function keyGen() {
+        return str_replace('-', '', substr(self::uuid(), 1, -1));
+    }
+
     public static function mSubStr($str, $start, $length, $charset = "utf-8", $suffix = true) {
         if(function_exists("mb_substr"))
             $slice = mb_substr($str, $start, $length, $charset);

@@ -2,6 +2,7 @@
 
 namespace app\admin\controller;
 
+use app\model\AdminApp;
 use app\model\AdminGroup;
 use app\model\AdminList;
 use app\util\ReturnCode;
@@ -79,6 +80,24 @@ class InterfaceGroup extends Base {
             return $this->buildFailed(ReturnCode::INVALID, '系统预留关键数据，禁止删除');
         }
         AdminList::update(['group_hash' => 'default'], ['group_hash' => $hash]);
+        $hashRule = AdminApp::all([
+            'app_api_show' => ['like', "%$hash%"],
+        ]);
+        if($hashRule) {
+            foreach($hashRule as $rule) {
+                $appApiShowArr = json_decode($rule->app_api_show, true);
+                if(!empty($appApiShowArr[$hash])) {
+                    if(isset($appApiShowArr['default'])) {
+                        $appApiShowArr['default'] = array_merge($appApiShowArr['default'], $appApiShowArr[$hash]);
+                    } else {
+                        $appApiShowArr['default'] = $appApiShowArr[$hash];
+                    }
+                }
+                unset($appApiShowArr[$hash]);
+                $rule->app_api_show = json_encode($appApiShowArr);
+                $rule->save();
+            }
+        }
         AdminGroup::destroy(['hash' => $hash]);
 
         return $this->buildSuccess();
