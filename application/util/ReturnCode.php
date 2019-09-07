@@ -12,7 +12,14 @@ class ReturnCode {
     const LOGIN_ERROR          = -7;
     const EMPTY_PARAMS         = -12;
     const AUTH_ERROR           = -14;
+    const RECORD_NOT_FOUND     = -19;
     const PARAM_INVALID        = -995;
     const ACCESS_TOKEN_TIMEOUT = -996;
     const EXCEPTION            = -999;
+
+    public static function getConstants() {
+        $oClass = new \ReflectionClass(__CLASS__);
+
+        return $oClass->getConstants();
+    }
 }

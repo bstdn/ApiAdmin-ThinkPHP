@@ -38,6 +38,20 @@ class Tools {
         return false;
     }
 
+    public static function buildArrFromObj($res, $key = '') {
+        $arr = [];
+        foreach($res as $value) {
+            $value = $value->toArray();
+            if($key) {
+                $arr[$value[$key]] = $value;
+            } else {
+                $arr[] = $value;
+            }
+        }
+
+        return $arr;
+    }
+
     public static function buildArrByNewKey($array, $keyName = 'id') {
         $list = [];
         foreach($array as $item) {
