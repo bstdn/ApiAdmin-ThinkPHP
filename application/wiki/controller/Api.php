@@ -30,7 +30,11 @@ class Api extends Base {
         }
         $appInfo = $appInfo->toArray();
         $apiAuth = md5(uniqid() . time());
+        if($oldWiki = cache('WikiLogin:' . $appInfo['id'])) {
+            cache('WikiLogin:' . $oldWiki, null);
+        }
         cache('WikiLogin:' . $apiAuth, $appInfo, config('apiadmin.online_time'));
+        cache('WikiLogin:' . $appInfo['id'], $apiAuth, config('apiadmin.online_time'));
         $appInfo['apiAuth'] = $apiAuth;
 
         return $this->buildSuccess($appInfo, '登录成功');
@@ -132,6 +136,7 @@ class Api extends Base {
     public function logout() {
         $ApiAuth = $this->request->header('ApiAuth');
         cache('WikiLogin:' . $ApiAuth, null);
+        cache('WikiLogin:' . $this->appInfo['id'], null);
         $oldAdmin = cache('Login:' . $ApiAuth);
         if($oldAdmin) {
             cache('Login:' . $ApiAuth, null);

@@ -49,7 +49,11 @@ class Login extends Base {
         $userInfo['access'] = $this->getAccess($userInfo['id']);
         unset($userInfo['password'], $userInfo['salt']);
         $apiAuth = md5(uniqid() . time());
+        if($oldAdmin = cache('Login:' . $userInfo['id'])) {
+            cache('Login:' . $oldAdmin, null);
+        }
         cache('Login:' . $apiAuth, json_encode($userInfo), config('apiadmin.online_time'));
+        cache('Login:' . $userInfo['id'], $apiAuth, config('apiadmin.online_time'));
         $userInfo['apiAuth'] = $apiAuth;
 
         return $this->buildSuccess($userInfo, '登录成功');
@@ -62,6 +66,7 @@ class Login extends Base {
     public function logout() {
         $ApiAuth = $this->request->header('ApiAuth');
         cache('Login:' . $ApiAuth, null);
+        cache('Login:' . $this->userInfo['id'], null);
 
         return $this->buildSuccess([], '登出成功');
     }
