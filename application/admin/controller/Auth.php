@@ -156,6 +156,7 @@ class Auth extends Base {
     private function buildList($list, $rules) {
         $newList = [];
         foreach($list as $key => $value) {
+            $newList[$key]['id'] = $value['id'];
             $newList[$key]['title'] = $value['name'];
             $newList[$key]['key'] = $value['url'];
             if(isset($value['_child'])) {
