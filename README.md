@@ -2,7 +2,7 @@
 
 ## 特别提示
 
-> 本项目前后端分离，与[vue-iview-api-admin](https://github.com/bstdn/vue-iview-api-admin)配合使用
+> 本项目前后端分离，与[vue-iview-api-admin](https://github.com/bstdn/vue-iview-api-admin)或[vue-element-api-admin](https://github.com/bstdn/vue-element-api-admin)配合使用
 
 ## 环境需求
 
@@ -55,11 +55,27 @@ config/cache.php
 
 ## 效果展示
 
+- vue-iview-api-admin
+
 ![输入图片说明](https://gitee.com/bstdn/codes/zawb1ye9frchxokpi8u5319/raw?blob_name=menu.png "menu.png")
 
 ![输入图片说明](https://gitee.com/bstdn/codes/zawb1ye9frchxokpi8u5319/raw?blob_name=appslist.png "appslist.png")
 
 ![输入图片说明](https://gitee.com/bstdn/codes/zawb1ye9frchxokpi8u5319/raw?blob_name=interfaceList.png "interfaceList.png")
+
+- vue-element-api-admin
+
+![输入图片说明](https://gitee.com/bstdn/codes/bi8us4dozcg5mna7qx6wv30/raw?blob_name=menu.png "menu.png")
+
+![输入图片说明](https://gitee.com/bstdn/codes/bi8us4dozcg5mna7qx6wv30/raw?blob_name=appList.png "appslist.png")
+
+![输入图片说明](https://gitee.com/bstdn/codes/bi8us4dozcg5mna7qx6wv30/raw?blob_name=interfaceList.png "interfaceList.png")
+
+## 赞赏
+
+**请作者喝杯咖啡吧！(微信号/QQ号：99808359)**
+
+<img width="236" alt="微信扫一扫" src="https://gitee.com/bstdn/codes/u09cbxavoljw8z3gfe7r420/raw?blob_name=weixin.jpeg">
 
 ## License
 
