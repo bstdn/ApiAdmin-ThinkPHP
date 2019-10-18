@@ -88,6 +88,7 @@ class App extends Base {
     public function edit() {
         $postData = $this->request->post();
         $data = [
+            'app_secret'   => $postData['app_secret'],
             'app_name'     => $postData['app_name'],
             'app_info'     => $postData['app_info'],
             'app_group'    => $postData['app_group'],
