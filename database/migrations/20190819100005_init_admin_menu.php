@@ -103,9 +103,9 @@ class InitAdminMenu extends Migrator
             ],
             [
                 'id'   => 14,
-                'name' => '用户列表',
+                'name' => '用户管理',
                 'fid'  => 4,
-                'url'  => 'admin/User/index',
+                'url'  => '',
                 'sort' => 2,
             ],
             [
@@ -426,6 +426,12 @@ class InitAdminMenu extends Migrator
                 'name' => '刷新AppSecret',
                 'fid'  => 61,
                 'url'  => 'admin/App/refreshAppSecret',
+            ],
+            [
+                'id'   => 70,
+                'name' => '用户列表',
+                'fid'  => 14,
+                'url'  => 'admin/User/index',
             ],
         ];
         $this->table('admin_menu')->insert($data)->save();
