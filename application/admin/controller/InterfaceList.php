@@ -41,6 +41,12 @@ class InterfaceList extends Base {
         ]);
     }
 
+    public function getHash() {
+        $res['hash'] = uniqid();
+
+        return $this->buildSuccess($res);
+    }
+
     public function changeStatus() {
         $hash = $this->request->get('hash');
         $status = $this->request->get('status');

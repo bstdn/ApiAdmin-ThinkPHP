@@ -24,9 +24,6 @@ Route::group('admin', function() {
     Route::rule(
         'Index/upload', 'admin/Index/upload', 'post'
     )->middleware(['AdminAuth', 'AdminLog']);
-    Route::rule(
-        'Index/getHash', 'admin/Index/getHash', 'get'
-    )->middleware(['AdminAuth', 'AdminLog']);
 
     Route::group('Menu', [
         'index'        => ['admin/Menu/index', ['method' => 'get']],
@@ -78,6 +75,7 @@ Route::group('admin', function() {
         'edit'         => ['admin/InterfaceList/edit', ['method' => 'post']],
         'del'          => ['admin/InterfaceList/del', ['method' => 'get']],
         'refresh'      => ['admin/InterfaceList/refresh', ['method' => 'get']],
+        'getHash'      => ['admin/InterfaceList/getHash', ['method' => 'get']],
     ])->middleware(['AdminAuth', 'AdminPermission', 'AdminLog']);
 
     Route::group('Fields', [
