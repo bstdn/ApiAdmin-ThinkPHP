@@ -9,11 +9,14 @@ use app\util\Tools;
 class Menu extends Base {
 
     public function index() {
-        $menu_list = (new AdminMenu)->order('sort', 'ASC')->select()->toArray();
-        $menu_list = Tools::formatTree(Tools::listToTree($menu_list));
+        $origin = (new AdminMenu)->order('sort', 'ASC')->select();
+        $origin = Tools::buildArrFromObj($origin);
+        $list = Tools::listToTree($origin);
+        $choose = Tools::formatTree($list);
 
         return $this->buildSuccess([
-            'list' => $menu_list,
+            'list'   => $list,
+            'choose' => $choose,
         ]);
     }
 
