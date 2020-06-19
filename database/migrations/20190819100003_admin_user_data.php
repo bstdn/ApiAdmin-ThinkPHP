@@ -1,6 +1,7 @@
 <?php
 
 use think\migration\Migrator;
+use Phinx\Db\Adapter\MysqlAdapter;
 
 class AdminUserData extends Migrator
 {
@@ -34,7 +35,7 @@ class AdminUserData extends Migrator
             'default' => 0,
             'comment' => '账号登录次数',
         ])->addColumn('last_login_ip', 'biginteger', [
-            'limit'   => 11,
+            'limit'   => MysqlAdapter::INT_BIG,
             'default' => 0,
             'comment' => '最后登录IP',
         ])->addColumn('last_login_time', 'integer', [
