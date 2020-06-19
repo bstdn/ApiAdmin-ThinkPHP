@@ -8,12 +8,12 @@
         "thinkphp",
         "ORM"
     ],
-    "homepage": "https://github.com/bstdn/php-thinkphp-api-admin",
+    "homepage": "https://github.com/bstdn",
     "license": "Apache-2.0",
     "authors": [
         {
             "name": "Stefan Ho",
-            "email": "xiugang.he@chukou1.com"
+            "email": "bstdn@126.com"
         }
     ],
     "require": {
