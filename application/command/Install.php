@@ -89,7 +89,7 @@ class Install extends Command {
             'hostname' => isset($info['host']) ? $info['host'] : '',
             'hostport' => isset($info['port']) ? $info['port'] : '3306',
             'database' => !empty($info['path']) ? ltrim($info['path'], '/') : '',
-            'charset'  => isset($info['fragment']) ? $info['fragment'] : 'utf8',
+            'charset'  => isset($info['fragment']) ? $info['fragment'] : 'utf8mb4',
         ];
         if(isset($info['query'])) {
             parse_str($info['query'], $dsn['params']);

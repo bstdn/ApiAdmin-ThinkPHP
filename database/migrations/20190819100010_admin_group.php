@@ -28,7 +28,7 @@ class AdminGroup extends Migrator
     public function change() {
         $table = $this->table('admin_group', [
             'comment' => '接口组管理',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('name', 'string', [
             'limit'   => 128,
             'default' => '',

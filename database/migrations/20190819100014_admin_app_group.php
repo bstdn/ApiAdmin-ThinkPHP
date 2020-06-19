@@ -28,7 +28,7 @@ class AdminAppGroup extends Migrator
     public function change() {
         $table = $this->table('admin_app_group', [
             'comment' => '应用组',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('name', 'string', [
             'limit'   => 128,
             'default' => '',

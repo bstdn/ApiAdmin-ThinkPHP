@@ -28,7 +28,7 @@ class AdminList extends Migrator
     public function change() {
         $table = $this->table('admin_list', [
             'comment' => '用于维护接口信息',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('api_class', 'string', [
             'limit'   => 50,
             'default' => '',

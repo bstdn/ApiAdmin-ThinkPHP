@@ -28,7 +28,7 @@ class AdminUser extends Migrator
     public function change() {
         $table = $this->table('admin_user', [
             'comment' => '管理员认证信息',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('username', 'string', [
             'limit'   => 64,
             'default' => '',

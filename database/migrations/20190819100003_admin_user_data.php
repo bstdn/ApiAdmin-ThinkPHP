@@ -28,7 +28,7 @@ class AdminUserData extends Migrator
     public function change() {
         $table = $this->table('admin_user_data', [
             'comment' => '管理员数据表',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('login_times', 'integer', [
             'limit'   => 11,
             'default' => 0,

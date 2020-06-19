@@ -29,8 +29,8 @@ php think apiadmin:install -h
 #      --prefix[=PREFIX]  数据库表前缀 [default: ""]
 
 # 示例:
-php think apiadmin:install --db mysql://root:123456@127.0.0.1:3306/apiadmin#utf8
-php think apiadmin:install --db mysql://root:123456@127.0.0.1:3306/apiadmin#utf8 --prefix=api_
+php think apiadmin:install --db mysql://root:123456@127.0.0.1:3306/apiadmin#utf8mb4
+php think apiadmin:install --db mysql://root:123456@127.0.0.1:3306/apiadmin#utf8mb4 --prefix=api_
 ```
 
 ### 数据库迁移

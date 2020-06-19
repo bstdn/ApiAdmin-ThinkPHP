@@ -28,7 +28,7 @@ class AdminUserAction extends Migrator
     public function change() {
         $table = $this->table('admin_user_action', [
             'comment' => '用户操作日志',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('action_name', 'string', [
             'limit'   => 50,
             'default' => '',

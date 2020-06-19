@@ -28,7 +28,7 @@ class AdminFields extends Migrator
     public function change() {
         $table = $this->table('admin_fields', [
             'comment' => '用于保存各个API的字段规则',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('field_name', 'string', [
             'limit'   => 50,
             'default' => '',

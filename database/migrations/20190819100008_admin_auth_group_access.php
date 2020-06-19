@@ -28,7 +28,7 @@ class AdminAuthGroupAccess extends Migrator
     public function change() {
         $table = $this->table('admin_auth_group_access', [
             'comment' => '用户和组的对应关系',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('uid', 'integer', [
             'limit'   => 11,
             'default' => 0,

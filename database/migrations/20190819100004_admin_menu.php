@@ -28,7 +28,7 @@ class AdminMenu extends Migrator
     public function change() {
         $table = $this->table('admin_menu', [
             'comment' => '目录信息',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('name', 'string', [
             'limit'   => 50,
             'default' => '',

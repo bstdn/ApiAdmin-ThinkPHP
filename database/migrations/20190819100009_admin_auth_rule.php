@@ -28,7 +28,7 @@ class AdminAuthRule extends Migrator
     public function change() {
         $table = $this->table('admin_auth_rule', [
             'comment' => '权限细节',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('url', 'string', [
             'limit'   => 80,
             'default' => '',

@@ -28,7 +28,7 @@ class AdminAuthGroup extends Migrator
     public function change() {
         $table = $this->table('admin_auth_group', [
             'comment' => '权限组',
-        ]);
+        ])->setCollation('utf8mb4_general_ci');
         $table->addColumn('name', 'string', [
             'limit'   => 50,
             'default' => '',
