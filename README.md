@@ -1,8 +1,8 @@
-# php-thinkphp-api-admin
+# ApiAdmin-ThinkPHP
 
 ## 特别提示
 
-> 本项目前后端分离，与[vue-iview-api-admin](https://github.com/bstdn/vue-iview-api-admin)或[vue-element-api-admin](https://github.com/bstdn/vue-element-api-admin)配合使用
+> 本项目前后端分离，与[ApiAdmin-iView](https://github.com/bstdn/ApiAdmin-iView)或[ApiAdmin-Element](https://github.com/bstdn/ApiAdmin-Element)配合使用
 
 ## 环境需求
 
@@ -15,8 +15,8 @@
 ### 克隆代码
 
 ```
-git clone https://github.com/bstdn/php-thinkphp-api-admin.git
-cd php-thinkphp-api-admin
+git clone https://github.com/bstdn/ApiAdmin-ThinkPHP.git
+cd ApiAdmin-ThinkPHP
 composer install
 ```
 
@@ -55,7 +55,7 @@ config/cache.php
 
 ## 效果展示
 
-- vue-iview-api-admin
+- ApiAdmin-iView
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/1123/111717_e6b82bff_1185106.png "menu.png")
 
@@ -63,7 +63,7 @@ config/cache.php
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/1123/111842_1845ceb0_1185106.png "interfaceList.png")
 
-- vue-element-api-admin
+- ApiAdmin-Element
 
 ![输入图片说明](https://images.gitee.com/uploads/images/2019/1123/111129_50384013_1185106.png "menu.png")
 
@@ -79,6 +79,6 @@ config/cache.php
 
 ## License
 
-[MIT](https://github.com/bstdn/php-thinkphp-api-admin/blob/master/LICENSE)
+[MIT](https://github.com/bstdn/ApiAdmin-ThinkPHP/blob/master/LICENSE)
 
 Copyright (c) 2019-present, bstdn
