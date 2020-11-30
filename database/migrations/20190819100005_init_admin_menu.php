@@ -247,7 +247,7 @@ class InitAdminMenu extends Migrator
             [
                 'id'   => 38,
                 'name' => '获取接口唯一标识',
-                'url'  => 'admin/Index/getHash',
+                'url'  => 'admin/InterfaceList/getHash',
             ],
             [
                 'id'   => 39,
